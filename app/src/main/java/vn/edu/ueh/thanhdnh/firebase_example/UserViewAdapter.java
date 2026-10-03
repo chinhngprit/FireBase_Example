@@ -12,27 +12,27 @@ import java.util.List;
 
 public class UserViewAdapter extends RecyclerView.Adapter<UserViewHolder> {
   private LayoutInflater mInflater;
-  private List<User> users;
+  private List<Article> users;
 
-  public UserViewAdapter(Context context, List<User> users) {
+  public UserViewAdapter(Context context, List<Article> users) {
     this.mInflater = LayoutInflater.from(context);
     this.users = users;
   }
 
-  public void update(List<User> users){
+  public void update(List<Article> users){
     this.users = users;
   }
 
   @NonNull
   @Override
   public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View customView = mInflater.inflate(R.layout.contact_list, parent, false);
+    View customView = mInflater.inflate(R.layout.item_article, parent, false);
     return new UserViewHolder(customView, this);
   }
 
   @Override
   public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-    User currentuser = users.get(position);
+    Article currentuser = users.get(position);
     holder.getTxtName().setText(currentuser.getName());
     holder.getTxtPhone().setText(currentuser.getPhone());
   }

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
   @Override
   public void onClick(View view) {
     if (view.getId() == R.id.btAdd) {
-      db.collection("users").add(new User(etName.getText().toString(), etPhone.getText().toString()));
+      db.collection("users").add(new Article(etName.getText().toString(), etPhone.getText().toString()));
       etName.setText("");
       etPhone.setText("");
     } else if (view.getId() == R.id.btShow) {

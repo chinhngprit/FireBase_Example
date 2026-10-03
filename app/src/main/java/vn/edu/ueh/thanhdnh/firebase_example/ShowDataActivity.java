@@ -1,10 +1,8 @@
 package vn.edu.ueh.thanhdnh.firebase_example;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,8 +11,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,12 +21,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class ShowDataActivity extends AppCompatActivity {
     FirebaseFirestore db;
     RecyclerView recyclerView;
-    List<User> users = new ArrayList();
+    List<Article> users = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +69,7 @@ public class ShowDataActivity extends AppCompatActivity {
             users.clear();
             for (QueryDocumentSnapshot q : snapshots) {
               Map<String, Object> data = q.getData();
-              User user = new User((String) data.get("name"), (String) data.get("phone"));
+              Article user = new Article((String) data.get("name"), (String) data.get("phone"));
               users.add(user);
             }
             adapter.update(users);
