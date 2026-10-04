@@ -5,6 +5,8 @@ public class Article {
   private String imageUrl; // Thêm thuộc tính lưu link ảnh (URL)
   private String description;
 
+  public Article() {}
+
   // Cập nhật Constructor để nhận đủ 3 tham số
   public Article(String title, String imageUrl, String description) {
     this.title = title;

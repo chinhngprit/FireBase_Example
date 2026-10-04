@@ -1,6 +1,8 @@
 package vn.edu.ueh.thanhdnh.firebase_example;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -25,7 +27,8 @@ import java.util.Map;
 public class ShowDataActivity extends AppCompatActivity {
     FirebaseFirestore db;
     RecyclerView recyclerView;
-    List<Article> users = new ArrayList();
+    List<Article> articles  = new ArrayList();
+    ArticleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,42 +40,46 @@ public class ShowDataActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
 
         FirebaseApp.initializeApp(this);
-        //users.add(new User("default", "000"));
 
+        // cai dat recyclerView va Adapter
         recyclerView = findViewById(R.id.reclyclerview);
-        ArticleAdapter adapter = new ArticleAdapter(getBaseContext(), users);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        adapter = new ArticleAdapter(ShowDataActivity.this, articles);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ShowDataActivity.this));
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-        /*db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-          @Override
-          public void onComplete(@NonNull Task<QuerySnapshot> task) {
-            if(task.isSuccessful()){
-              users.clear();
-              for(QueryDocumentSnapshot q : task.getResult()){
-                Map<String, Object> data = q.getData();
-                User user = new User((String)data.get("name"), (String)data.get("phone"));
-                users.add(user);
-              }
-              adapter.update(users);
-              adapter.notifyDataSetChanged();
-            }
-          }
-        });*/
-      db.collection("users").addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        // lang nghe du lieu realtime tu collection articles
+      db.collection("articles").addSnapshotListener(new EventListener<QuerySnapshot>() {
         @Override
         public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException error) {
-          if (snapshots != null) {
-            users.clear();
-            for (QueryDocumentSnapshot q : snapshots) {
-              Map<String, Object> data = q.getData();
-              Article user = new Article((String) data.get("name"), (String) data.get("phone"));
-              users.add(user);
+          if (error != null) {
+            Log.e("Firebase", "Lỗi đọc dữ liệu: ", error);
+              Toast.makeText(ShowDataActivity.this, "Lỗi kết nối Firebase", Toast.LENGTH_SHORT).show();
+              return;
             }
-            adapter.update(users);
+          if (snapshots != null) {
+              // xoa danh sach cu de tranh bij trung lap khi load lai
+              articles.clear();
+
+              for (QueryDocumentSnapshot document : snapshots){
+                  Map<String, Object> data = document.getData();
+
+                  String title = data.get("title") != null ? (String) data.get("title") : "";
+                  String imageUrl = data.get("imageUrl") != null ? (String) data.get("imageUrl") : "";
+                  String description = data.get("description") != null ? (String) data.get("description") : "";
+
+                  // Dong goi thanh doi tuowng Article va them vao mang
+                  Article article = new Article(title, imageUrl, description);
+                  articles.add(article);
+              }
+              // cap nhat mang vao adapter va ve lai man hinh
+            adapter.update(articles);
             adapter.notifyDataSetChanged();
           }
         }
