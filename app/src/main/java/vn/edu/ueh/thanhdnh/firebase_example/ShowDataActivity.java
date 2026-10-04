@@ -42,7 +42,7 @@ public class ShowDataActivity extends AppCompatActivity {
         //users.add(new User("default", "000"));
 
         recyclerView = findViewById(R.id.reclyclerview);
-        UserViewAdapter adapter = new UserViewAdapter(getBaseContext(), users);
+        ArticleAdapter adapter = new ArticleAdapter(getBaseContext(), users);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setAdapter(adapter);
 
