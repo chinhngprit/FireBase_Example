@@ -18,6 +18,7 @@
     <activity
       android:name=".ShowDataActivity"
       android:exported="false" />
+    <activity android:name=".ArticleDetailActivity" android:parentActivityName=".ShowDataActivity" />
     <activity
       android:name=".MainActivity"
       android:exported="true">

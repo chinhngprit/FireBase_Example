@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //      v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //      return insets;
 //    });
+
+    // CÀI ĐẶT TOOLBAR
+    androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar_main);
+    setSupportActionBar(toolbar);
     // khoi tao Firebase
     FirebaseApp.initializeApp(this);
     db = FirebaseFirestore.getInstance();

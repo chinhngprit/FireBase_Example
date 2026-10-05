@@ -3,33 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_main_dark">
 
-  <LinearLayout
-      android:id="@+id/linearLayout"
+  <!-- Thay thế TextView cũ bằng Toolbar -->
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar_show_data"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      app:layout_constraintTop_toTopOf="parent">
-
-    <!-- Gộp thành 1 tiêu đề chung -->
-    <TextView
-        android:id="@+id/txt_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#3F51B5"
-        android:padding="10dp"
-        android:text="Bảng Tin (Articles Feed)"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center" />
-  </LinearLayout>
+      android:layout_height="?attr/actionBarSize"
+      android:background="@color/bg_card_dark"
+      app:title="Bảng Tin (Feed)"
+      app:titleTextColor="@color/text_title_white"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/reclyclerview"
       android:layout_width="match_parent"
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+      app:layout_constraintTop_toBottomOf="@+id/toolbar_show_data" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

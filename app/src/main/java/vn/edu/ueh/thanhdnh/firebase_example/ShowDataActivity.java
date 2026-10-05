@@ -40,8 +40,12 @@ public class ShowDataActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        if (getSupportActionBar() != null){
-            getSupportActionBar().hide();
+        findViewById(R.id.main).setBackgroundColor(android.graphics.Color.parseColor("#0A0A0A"));
+        // 1. CÀI ĐẶT TOOLBAR VÀ NÚT BACK
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar_show_data);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         FirebaseApp.initializeApp(this);
@@ -74,8 +78,14 @@ public class ShowDataActivity extends AppCompatActivity {
                   String imageUrl = data.get("imageUrl") != null ? (String) data.get("imageUrl") : "";
                   String description = data.get("description") != null ? (String) data.get("description") : "";
 
+                  // Lấy số view từ Firebase (nếu chưa có thì mặc định là 0)
+                  long views = data.get("views") != null ? (long) data.get("views") : 0;
+
                   // Dong goi thanh doi tuowng Article va them vao mang
                   Article article = new Article(title, imageUrl, description);
+                  // THÊM 2 DÒNG NÀY: Lưu lại ID của Firebase và gán số View
+                  article.setId(document.getId());
+                  article.setViews((int) views);
                   articles.add(article);
               }
               // cap nhat mang vao adapter va ve lai man hinh
@@ -84,5 +94,12 @@ public class ShowDataActivity extends AppCompatActivity {
           }
         }
       });
+
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // Đóng màn hình danh sách, quay về màn hình nhập liệu
+        return true;
+    }
+
 }

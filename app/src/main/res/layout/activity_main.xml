@@ -1,68 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center_vertical">
+    android:background="@color/bg_main_dark">
 
-  <TextView
+  <!-- Thanh Toolbar trên cùng -->
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar_main"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Thêm Bài Viết Mới"
-      android:textSize="24sp"
-      android:textStyle="bold"
-      android:layout_marginBottom="20dp"
-      android:gravity="center" />
+      android:layout_height="?attr/actionBarSize"
+      android:background="@color/bg_card_dark"
+      app:title="Thêm Bài Viết Mới"
+      app:titleTextColor="@color/text_title_white" />
 
-  <!-- Ô Tiêu đề -->
-  <EditText
-      android:id="@+id/etTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Nhập tiêu đề bài viết"
-      android:inputType="text"
-      android:layout_marginBottom="10dp" />
-
-  <!-- Ô Link Ảnh -->
-  <EditText
-      android:id="@+id/etImageUrl"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Dán đường link ảnh (URL)"
-      android:inputType="textUri"
-      android:layout_marginBottom="10dp" />
-
-  <!-- Ô Nội dung -->
-  <EditText
-      android:id="@+id/etDescription"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="Nhập nội dung bài viết"
-      android:inputType="textMultiLine"
-      android:lines="3"
-      android:gravity="top"
-      android:layout_marginBottom="20dp" />
-
+  <!-- Khối nội dung nhập liệu -->
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:gravity="center">
+      android:orientation="vertical"
+      android:padding="20dp"
+      android:gravity="center_vertical">
 
-    <Button
-        android:id="@+id/btAdd"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Article"
-        android:layout_marginEnd="10dp"/>
+        android:hint="Nhập tiêu đề bài viết"
+        android:textColorHint="@color/text_content_grey"
+        android:textColor="@color/text_title_white"
+        android:inputType="text"
+        android:layout_marginBottom="10dp" />
 
-    <Button
-        android:id="@+id/btShow"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etImageUrl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Feed"
-        android:layout_marginStart="10dp"/>
+        android:hint="Dán đường link ảnh (URL)"
+        android:textColorHint="@color/text_content_grey"
+        android:textColor="@color/text_title_white"
+        android:inputType="textUri"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập nội dung bài viết"
+        android:textColorHint="@color/text_content_grey"
+        android:textColor="@color/text_title_white"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:gravity="top"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+      <Button
+          android:id="@+id/btAdd"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Add Article"
+          android:backgroundTint="#4CAF50"
+          android:layout_marginEnd="10dp"/>
+
+      <Button
+          android:id="@+id/btShow"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Show Feed"
+          android:layout_marginStart="10dp"/>
+    </LinearLayout>
   </LinearLayout>
 </LinearLayout>

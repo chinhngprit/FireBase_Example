@@ -34,22 +34,24 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
 
   @Override
   public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
-    // lay bai viet hien tai theo vi tri
     Article currentArticle = articles.get(position);
-    // cap nhat do van ban vao text view
+
     holder.getTxtTitle().setText(currentArticle.getTitle());
     holder.getTxtDescription().setText(currentArticle.getDescription());
-    // dung picasso tai anh tu URL
+    holder.getTxtViews().setText("Views: " + currentArticle.getViews());
+
     String imageURL = currentArticle.getImageUrl();
-    // ktra bai viet co link anh khong
-    if (imageURL != null && !imageURL.isEmpty()){
-      Picasso.get()
-              .load(imageURL)
-              .placeholder(android.R.drawable.ic_menu_gallery) // anh xam hien thi tam luc tai manhg
-              .into(holder.getImgArticle());
-    } else {
-      holder.getImgArticle().setImageResource(android.R.drawable.ic_menu_gallery);
+    if (imageURL != null && !imageURL.isEmpty()) {
+      Picasso.get().load(imageURL).placeholder(android.R.drawable.ic_menu_gallery).into(holder.getImgArticle());
     }
+
+    // THÊM SỰ KIỆN CLICK: Mở màn hình Detail khi nhấn vào bài viết
+    holder.itemView.setOnClickListener(v -> {
+      // Chuyển sang màn hình ArticleDetailActivity và gửi theo đối tượng currentArticle
+      android.content.Intent intent = new android.content.Intent(holder.itemView.getContext(), ArticleDetailActivity.class);
+      intent.putExtra("ARTICLE_DATA", currentArticle);
+      holder.itemView.getContext().startActivity(intent);
+    });
   }
 
   @Override
