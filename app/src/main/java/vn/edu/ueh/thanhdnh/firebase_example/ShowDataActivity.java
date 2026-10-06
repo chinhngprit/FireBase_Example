@@ -68,7 +68,7 @@ public class ShowDataActivity extends AppCompatActivity {
               return;
             }
           if (snapshots != null) {
-              // xoa danh sach cu de tranh bij trung lap khi load lai
+              // xoa danh sach cu de tran8h bij trung lap khi load lai
               articles.clear();
 
               for (QueryDocumentSnapshot document : snapshots){
